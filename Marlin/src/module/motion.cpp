@@ -1708,6 +1708,9 @@ void prepare_line_to_destination() {
     const int8_t axis_home_dir = TERN0(DUAL_X_CARRIAGE, axis == X_AXIS)
                   ? TOOL_X_HOME_DIR(active_extruder) : home_dir(axis);
     const bool is_home_dir = (axis_home_dir > 0) == (distance > 0);
+    if (DEBUGGING(LEVELING)) { 
+      DEBUG_ECHOLNPGM("axis_home_dir", axis_home_dir);
+      DEBUG_ECHOLNPGM("is_home_dir", is_home_dir);}
 
     #if ENABLED(SENSORLESS_HOMING)
       sensorless_t stealth_states;
@@ -1747,9 +1750,12 @@ void prepare_line_to_destination() {
     #else
       // Get the ABC or XYZ positions in mm
       abce_pos_t target = planner.get_axis_positions_mm();
+      if (DEBUGGING(LEVELING)) DEBUG_ECHOLNPGM("motion.cpp(1753) Position before set: ", target[axis]);
+
 
       target[axis] = 0;                         // Set the single homing axis to 0
       planner.set_machine_position_mm(target);  // Update the machine position
+      if (DEBUGGING(LEVELING)) DEBUG_ECHOLNPGM("motion.cpp(1758) Position after set: ", planner.get_axis_positions_mm()[axis]);
 
       #if HAS_DIST_MM_ARG
         const xyze_float_t cart_dist_mm{0};
@@ -1760,7 +1766,9 @@ void prepare_line_to_destination() {
       planner.buffer_segment(target OPTARG(HAS_DIST_MM_ARG, cart_dist_mm), home_fr_mm_s, active_extruder);
     #endif
 
+    if (DEBUGGING(LEVELING)) DEBUG_ECHOLNPGM("motion.cpp(1769) Before synchronize");
     planner.synchronize();
+    if (DEBUGGING(LEVELING)) DEBUG_ECHOLNPGM("motion.cpp(1771) After synchronize");
 
     if (is_home_dir) {
 
@@ -1976,10 +1984,13 @@ void prepare_line_to_destination() {
     // Deploy BLTouch or tare the probe just before probing
     //
     #if HOMING_Z_WITH_PROBE
+      if (DEBUGGING(LEVELING)) DEBUG_ECHOLNPGM("HOMING Z with probe");
       if (axis == Z_AXIS) {
         if (TERN0(BLTOUCH, bltouch.deploy())) return;   // BLTouch was deployed above, but get the alarm state.
         if (TERN0(PROBE_TARE, probe.tare())) return;
       }
+    #else
+      if (DEBUGGING(LEVELING)) DEBUG_ECHOLNPGM("NOT homing Z with probe");
     #endif
 
     //

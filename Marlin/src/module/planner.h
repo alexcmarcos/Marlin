@@ -46,6 +46,9 @@
 #include "motion.h"
 #include "../gcode/queue.h"
 
+#define DEBUG_OUT ENABLED(DEBUG_LEVELING_FEATURE)
+#include "../core/debug_out.h"
+
 #if ENABLED(DELTA)
   #include "delta.h"
 #elif ENABLED(POLARGRAPH)
@@ -933,6 +936,17 @@ class Planner {
     static bool busy() {
       return (has_blocks_queued() || cleaning_buffer_counter
           || TERN0(EXTERNAL_CLOSED_LOOP_CONTROLLER, CLOSED_LOOP_WAITING())
+      // DEBUG_SECTION(log_busy, "busy", DEBUGGING(LEVELING));
+      // static bool blocks_queued = has_blocks_queued();
+      // static bool closed_loop_waiting = TERN0(EXTERNAL_CLOSED_LOOP_CONTROLLER, CLOSED_LOOP_WAITING());
+      // if (DEBUGGING(LEVELING)) { 
+      //   DEBUG_ECHOLNPGM("planner.h(940) blocks_queued: ", blocks_queued);
+      //   DEBUG_ECHOLNPGM("planner.h(941) cleaning_buffer_counter: ", cleaning_buffer_counter);
+      //   DEBUG_ECHOLNPGM("planner.h(942) closed_loop_waiting: ", closed_loop_waiting);
+      // }
+
+      // return (blocks_queued || cleaning_buffer_counter
+      //     || closed_loop_waiting
       );
     }
 

@@ -145,6 +145,9 @@ Stepper stepper; // Singleton
 
 #if EITHER(HAS_EXTRA_ENDSTOPS, Z_STEPPER_AUTO_ALIGN)
   bool Stepper::separate_multi_axis = false;
+  #if (DEBUGGING(LEVELING)) 
+    DEBUG_ECHOLNPGM("stepper.cpp(149)separate_multi_axis: ", separate_multi_axis);
+  #endif
 #endif
 
 #if HAS_MOTOR_CURRENT_SPI || HAS_MOTOR_CURRENT_PWM

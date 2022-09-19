@@ -49,6 +49,10 @@
   #include "stepper/speed_lookuptable.h"
 #endif
 
+#define DEBUG_OUT ENABLED(DEBUG_LEVELING_FEATURE)
+#include "../core/debug_out.h"
+
+
 // Disable multiple steps per ISR
 //#define DISABLE_MULTI_STEPPING
 
@@ -456,7 +460,10 @@ class Stepper {
 
     // The stepper subsystem goes to sleep when it runs out of things to execute.
     // Call this to notify the subsystem that it is time to go to work.
-    static void wake_up() { ENABLE_STEPPER_DRIVER_INTERRUPT(); }
+    static void wake_up() { 
+      DEBUG_SECTION(wake_up, "planner.cpp wake_up", DEBUGGING(LEVELING));
+      if (DEBUGGING(LEVELING)) DEBUG_ECHOLNPGM("stepper.h(464)Waking up stepper");
+      ENABLE_STEPPER_DRIVER_INTERRUPT(); }
 
     static bool is_awake() { return STEPPER_ISR_ENABLED(); }
 
@@ -542,8 +549,10 @@ class Stepper {
       static void microstep_readings();
     #endif
 
-    #if EITHER(HAS_EXTRA_ENDSTOPS, Z_STEPPER_AUTO_ALIGN)
-      FORCE_INLINE static void set_separate_multi_axis(const bool state) { separate_multi_axis = state; }
+    #if EITHER(HAS_EXTRA_ENDSTOPS, Z_STEPPER_AUTO_ALIGN) 
+      FORCE_INLINE static void set_separate_multi_axis(const bool state) { 
+        separate_multi_axis = state; 
+        if (DEBUGGING(LEVELING)) DEBUG_ECHOLNPGM("stepper.h(552)separate_multi_axis: ", separate_multi_axis, ", false being ", false);}
     #endif
     #if ENABLED(X_DUAL_ENDSTOPS)
       FORCE_INLINE static void set_x_lock(const bool state) { locked_X_motor = state; }

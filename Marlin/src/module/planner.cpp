@@ -3008,6 +3008,8 @@ bool Planner::buffer_segment(const abce_pos_t &abce
   , const uint8_t extruder/*=active_extruder*/
   , const PlannerHints &hints/*=PlannerHints()*/
 ) {
+  DEBUG_SECTION(buffer_segment, "Planner::buffer segment", DEBUGGING(LEVELING));
+
 
   // If we are cleaning, do not accept queuing of movements
   if (cleaning_buffer_counter) return false;
@@ -3049,7 +3051,7 @@ bool Planner::buffer_segment(const abce_pos_t &abce
     }
   #endif
 
-  /* <-- add a slash to enable
+  //* <-- add a slash to enable
     SERIAL_ECHOPGM("  buffer_segment FR:", fr_mm_s);
     #if IS_KINEMATIC
       SERIAL_ECHOPGM(" A:", abce.a, " (", position.a, "->", target.a, ") B:", abce.b);

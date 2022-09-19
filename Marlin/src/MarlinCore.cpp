@@ -54,6 +54,9 @@
 #include "feature/pause.h"
 #include "sd/cardreader.h"
 
+#define DEBUG_OUT ENABLED(DEBUG_LEVELING_FEATURE)
+#include "core/debug_out.h"
+
 #include "lcd/marlinui.h"
 #if HAS_TOUCH_BUTTONS
   #include "lcd/touch/touch_buttons.h"
@@ -774,6 +777,7 @@ inline void manage_inactivity(const bool no_stepper_sleep=false) {
  *  - Handle Joystick jogging
  */
 void idle(bool no_stepper_sleep/*=false*/) {
+  // if (DEBUGGING(LEVELING)) { DEBUG_ECHOLNPGM("MarlinCore.cpp(780) idle()");}
   #ifdef MAX7219_DEBUG_PROFILE
     CodeProfiler idle_profiler;
   #endif
