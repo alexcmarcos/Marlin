@@ -121,6 +121,9 @@
   #ifndef Z_MAX_PIN
     #define Z_MAX_PIN                       PC15  // PWRDET
   #endif
+  // #ifndef X_MAX_PIN
+  //   #define X_MAX_PIN                       PC2   // E0DET
+  // #endif  
 #else
   #ifndef Z_STOP_PIN
     #define Z_STOP_PIN                      PC0   // Z-STOP
@@ -131,6 +134,7 @@
 // Z Probe (when not Z_MIN_PIN)
 //
 #ifndef Z_MIN_PROBE_PIN
+  // #define Z_MIN_PROBE_PIN Z_MIN_PIN
   #define Z_MIN_PROBE_PIN                   PE4
 #endif
 
@@ -355,9 +359,9 @@
 
 #define EXP2_01_PIN                         PA6
 #define EXP2_02_PIN                         PA5
-#define EXP2_03_PIN                         PE7
+#define EXP2_03_PIN                         PB2
 #define EXP2_04_PIN                         PA4
-#define EXP2_05_PIN                         PB2
+#define EXP2_05_PIN                         PE7
 #define EXP2_06_PIN                         PA7
 #define EXP2_07_PIN                         PC4
 #define EXP2_08_PIN                         -1

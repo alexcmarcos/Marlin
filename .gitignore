@@ -118,7 +118,7 @@ tags
 *.su
 
 # PlatformIO files/dirs
-.pio*
+.pio/*
 .pioenvs
 .piolibdeps
 .clang_complete
@@ -153,6 +153,14 @@ CMakeLists.txt
 src/CMakeLists.txt
 CMakeListsPrivate.txt
 build/
+
+
+# Un-ignore firmware.bin
+!.pio/build/
+.pio/build/*
+!.pio/build/BIGTREE_SKR_2_F429
+.pio/build/BIGTREE_SKR_2_F429/*
+!.pio/build/BIGTREE_SKR_2_F429/firmware.bin
 
 # CLion
 cmake-build-*

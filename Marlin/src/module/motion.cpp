@@ -2019,9 +2019,11 @@ void prepare_line_to_destination() {
     // Determine if a homing bump will be done and the bumps distance
     // When homing Z with probe respect probe clearance
     const bool use_probe_bump = TERN0(HOMING_Z_WITH_PROBE, axis == Z_AXIS && home_bump_mm(axis));
+    if (DEBUGGING(LEVELING)) DEBUG_ECHOLNPGM("use_probe_bump: ", use_probe_bump);
     const float bump = axis_home_dir * (
       use_probe_bump ? _MAX(TERN0(HOMING_Z_WITH_PROBE, Z_CLEARANCE_BETWEEN_PROBES), home_bump_mm(axis)) : home_bump_mm(axis)
     );
+    if (DEBUGGING(LEVELING)) DEBUG_ECHOLNPGM("bump: ", bump);
 
     //
     // Fast move towards endstop until triggered
