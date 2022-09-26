@@ -1695,8 +1695,8 @@
 // @section geometry
 
 // The size of the printable area
-#define X_BED_SIZE 400 //TODO:put real measures
-#define Y_BED_SIZE 800 //TODO:put real measures
+#define X_BED_SIZE 445
+#define Y_BED_SIZE 885 
 
 // Travel limits (linear=mm, rotational=°) after homing, corresponding to endstop positions.
 #define X_MIN_POS 0
@@ -1704,7 +1704,7 @@
 #define Z_MIN_POS 0
 #define X_MAX_POS X_BED_SIZE
 #define Y_MAX_POS Y_BED_SIZE
-#define Z_MAX_POS 150
+#define Z_MAX_POS 139
 //#define I_MIN_POS 0
 //#define I_MAX_POS 50
 //#define J_MIN_POS 0
@@ -1730,8 +1730,8 @@
 // Min software endstops constrain movement within minimum coordinate bounds
 #define MIN_SOFTWARE_ENDSTOPS
 #if ENABLED(MIN_SOFTWARE_ENDSTOPS)
-  // #define MIN_SOFTWARE_ENDSTOP_X
-  // #define MIN_SOFTWARE_ENDSTOP_Y
+  #define MIN_SOFTWARE_ENDSTOP_X
+  #define MIN_SOFTWARE_ENDSTOP_Y
   #define MIN_SOFTWARE_ENDSTOP_Z
   // #define MIN_SOFTWARE_ENDSTOP_I
   // #define MIN_SOFTWARE_ENDSTOP_J
@@ -1742,17 +1742,17 @@
 #endif
 
 // Max software endstops constrain movement within maximum coordinate bounds
-// #define MAX_SOFTWARE_ENDSTOPS
+#define MAX_SOFTWARE_ENDSTOPS
 #if ENABLED(MAX_SOFTWARE_ENDSTOPS)
   #define MAX_SOFTWARE_ENDSTOP_X
   #define MAX_SOFTWARE_ENDSTOP_Y
   #define MAX_SOFTWARE_ENDSTOP_Z
-  #define MAX_SOFTWARE_ENDSTOP_I
-  #define MAX_SOFTWARE_ENDSTOP_J
-  #define MAX_SOFTWARE_ENDSTOP_K
-  #define MAX_SOFTWARE_ENDSTOP_U
-  #define MAX_SOFTWARE_ENDSTOP_V
-  #define MAX_SOFTWARE_ENDSTOP_W
+  // #define MAX_SOFTWARE_ENDSTOP_I
+  // #define MAX_SOFTWARE_ENDSTOP_J
+  // #define MAX_SOFTWARE_ENDSTOP_K
+  // #define MAX_SOFTWARE_ENDSTOP_U
+  // #define MAX_SOFTWARE_ENDSTOP_V
+  // #define MAX_SOFTWARE_ENDSTOP_W
 #endif
 
 #if EITHER(MIN_SOFTWARE_ENDSTOPS, MAX_SOFTWARE_ENDSTOPS)
@@ -2095,7 +2095,7 @@
 #endif
 
 // Homing speeds (linear=mm/min, rotational=°/min)
-#define HOMING_FEEDRATE_MM_M { (40*60), (40*60), (1*60) } // Increased from V1 eng values
+#define HOMING_FEEDRATE_MM_M { (40*60), (40*60), (4*60) } // Increased from V1 eng values
 
 // Validate that endstops are triggered on homing moves
 #define VALIDATE_HOMING_ENDSTOPS
@@ -2539,7 +2539,7 @@
 // Add individual axis homing items (Home X, Home Y, and Home Z) to the LCD menu.
 //
 #define INDIVIDUAL_AXIS_HOMING_MENU
-//#define INDIVIDUAL_AXIS_HOMING_SUBMENU
+#define INDIVIDUAL_AXIS_HOMING_SUBMENU
 
 //
 // SPEAKER/BUZZER
